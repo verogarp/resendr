@@ -15,19 +15,34 @@ const userSchema = new mongoose.Schema({
     },
     unique: [true, "This is email is registered"]
   },
+  password: {
+    type: String,
+    required: [true, "password is required"]
+  },
+
+  location:{
+    type: String,
+    required: [true, "Location is required"]
+  },
+
   role: {
     type: String,
-    enum: ["host", "regular"],
+    enum: ["resender", "regular"],
     required: true,
     default: "regular"
-  },
-  birthDate: {
-    type: Number,
-    required: true
   },
   createdAt: {
     type: Number,
     default: Date.now() // Get a timestamp :)
+  },
+  resends: {
+    type: Number,
+  },
+  review: {
+    type: String,
+  },
+  resentTypes: {
+    type: Number,
   }
 });
 
