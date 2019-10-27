@@ -1,0 +1,16 @@
+{
+  "name": "reboot-front-example",
+  "version": "1.0.0",
+  "description": "Starts simple web server for html/css/js frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": " http-server"
+  },
+  "author": "Fer Martin <fer@reboot.academy>",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
