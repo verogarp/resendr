@@ -18,6 +18,7 @@ app.use(cors()); // Using cors middleware
 app.use(morgan('combined')); // Using morgan middleware
 app.use(express.json()); // Using JSON Body parser middleware
 app.use(helmet())
+app.use(authenticate);
 
 // NONGOOSE
 mongoose.connect(config.mongoURL + config.mongoDBName);
@@ -25,7 +26,6 @@ mongoose.connect(config.mongoURL + config.mongoDBName);
 // ROUTING
 const apiRouter = require('./routes');
 app.use('/api', apiRouter);
-//app.use('/api', authenticate);
 
 // Init server
 app.listen(config.port, (err) => {
