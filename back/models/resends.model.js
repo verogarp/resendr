@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const resendSchema = new mongoose.Schema({
   fromUser: {
-    type: String,
-    required: [true,"from user is required"]
+    type: Schema.Types.ObjectId, 
+    ref: "User",
+    required: [true,"fromUser is required"]
   },
   destinationUser: {
-    type: String,
+    type: Schema.Types.ObjectId, 
+    ref: "User",
     required: [true,"destination user is required"]
   },
   fromLocation:{
@@ -22,12 +25,12 @@ const resendSchema = new mongoose.Schema({
     required: [true, "price is required"]
   },
   date: {
-    type: Number,
-    required: true
+    type: Date,
+    required: [true, "date is required"]
   },
   status: {
     type: String,
-    enum: ["pending", "bought", "resend","confirm"],
+    enum: ["pending", "bought", "resend","confirmed"],
   },
   packageSize: {
     type: String,

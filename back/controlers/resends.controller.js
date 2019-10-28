@@ -10,7 +10,7 @@ module.exports = {
 
 function getAllResends(req, res){
   ResendModel.find()
-  .then(responde => res.json(response))
+  .then(response => res.json(response))
   .catch((err) => handdleError(err, res))
 }
 function getResendById(req, res) {

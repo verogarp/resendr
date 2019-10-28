@@ -21,7 +21,7 @@ const userSchema = new mongoose.Schema({
   },
 
   location:{
-    type: String,
+    type: Object,
     required: [true, "Location is required"]
   },
 
