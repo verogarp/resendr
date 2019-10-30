@@ -48,31 +48,41 @@
 
     <div id="resend">
 
-      <label for="destination_user">Destination user:</label>
-      <select name="" id="destination_user"> </select>
+      <div id="request">
+        <h3>Configure your Request</h3>
+        <label for="destination_location">Delivery Address</label>
+        <input type="location" id="destination_location" name="destination_location" />
+        <label for="destination_location">Delivery Province</label>
+        <input type="location" id="destination_location" name="destination_location" />
+        <label for="destination_location">Delivery Postal Code</label>
+        <input type="location" id="destination_location" name="destination_location" />
 
-      <label for="from_location">From location:</label>
-      <input type="location" id="from_location" name="from_location" />
+        <label for="price">Price</label>
+        <input type="num" id="price" name="price" />
 
-      <label for="destination_location">To location:</label>
-      <input type="location" id="destination_location" name="destination_location" />
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" />
 
-      <label for="price">Price:</label>
-      <input type="num" id="price" name="price" />
+        <label for="package_size">Package size:</label>
+        <select name="" id="package_size">
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+          <option value="extraLarge">Extra Large</option>
+        </select>
 
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date" />
+        <label for="fragile">Fragile?:</label>
+        <input type="checkbox" id="fragile" name="fragile" />
+      </div>
 
-      <label for="package_size">Package size:</label>
-      <select name="" id="package_size">
-        <option value="small">Small</option>
-        <option value="medium">Medium</option>
-        <option value="large">Large</option>
-        <option value="extraLarge">Extra Large</option>
-      </select>
+      <div id="resenders">
+        <h3>Select Resender</h3>
+        <label for="from_location">From location:</label>
+        <select id="from_location" name="from_location" />
 
-      <label for="fragile">Fragile?:</label>
-      <input type="checkbox" id="fragile" name="fragile" />
+        <label for="destination_user">Destination user:</label>
+        <select name="" id="destination_user"> </select>
+      </div>
 
       <button id="btn-resend">Resend</button>
     </div>

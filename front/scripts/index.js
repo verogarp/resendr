@@ -1,5 +1,7 @@
 window.addEventListener("load", event => {});
 
+const token = localStorage.getItem("token");
+
 (function authenticated() {
   if (localStorage.getItem("token")) {
     console.log("user authenticated");
@@ -16,21 +18,6 @@ const api = axios.create({
   }
 });
 
-//GetAllUsers
-const destinationUser = document.getElementById("destination_user");
-api
-  .get("/users")
-  .then(function(response) {
-    var html = "";
-    response.data.forEach(function(user) {
-      html += `<option value="${user._id}"> ${user.name} </option>`;
-    });
-    destinationUser.innerHTML = html;
-  })
-  .catch(function(error) {
-    console.log(error);
-  });
-
 document.getElementById("btn-signup").addEventListener("click", event => {
   const newUser = {
     name: document.getElementById("user_name").value,
@@ -43,7 +30,7 @@ document.getElementById("btn-signup").addEventListener("click", event => {
     .post("auth/signup", newUser)
     .then(function(response) {
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("name", response.data.name);
+      localStorage.setItem("name", response.data.username);
       localStorage.setItem("email", response.data.email);
     })
     .catch(function(error) {
@@ -82,9 +69,6 @@ document.getElementById("btn-resend").addEventListener("click", event => {
     packageSize: document.getElementById("package_size").value,
     fragile: document.getElementById("fragile").value === "on"
   };
-
-  const token = localStorage.getItem("token");
-
   api
     .post("resends", newResend, { headers: { access_token: token } })
     .then(function(response) {
@@ -95,15 +79,18 @@ document.getElementById("btn-resend").addEventListener("click", event => {
     });
 });
 
+fromLocation = document.getElementById('from_location');
+
 api
-  .get("auth/whoami", {
-    headers: { access_token: localStorage.getItem("token") }
+  .get("resends/locations", { headers: { access_token: token } })
+  .then(addresses => {
+    let html = "";
+    addresses.data.forEach(function (address) {
+      html += `<option value="${address._id}"> ${address.location} </option>`;
+    });
+    fromLocation.innerHTML = html;
   })
-  .then(function(response) {
-    localStorage.setItem("whoami", response.data._id);
-  })
-  .catch(function(error) {
-    console.log(error.response);
-  });
 
+fromLocation.addEventListener('change', (event) => {
 
+})
