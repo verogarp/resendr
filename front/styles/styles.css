@@ -1,0 +1,15 @@
+body {
+  padding: 40px;
+}
+label, button {
+  display: block;
+}
+
+input {
+  margin-bottom: 20px;
+}
+#register, #login {
+  width: 40%;
+  display: inline-block;
+  vertical-align: top;
+}

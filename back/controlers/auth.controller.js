@@ -5,7 +5,8 @@ let config = require('../.env');
 
 module.exports = {
   signup,
-  login
+  login,
+  whoami
 };
 
 function signup(req, res) {
@@ -23,7 +24,7 @@ function signup(req, res) {
     const token = jwt.sign(
       user_data,
       config.secrets.authSecret,
-      { expiresIn: "1h" }
+      { expiresIn: "9h" }
     );
 
     return res.json({ token: token, ...user_data })
@@ -45,11 +46,23 @@ function login(req, res) {
       const token = jwt.sign(
         user_data,
         config.secrets.authSecret,
-        { expiresIn: "1h" }
+        { expiresIn: "9h" }
       );
 
       return res.json({ token: token, ...user_data });
     })
   })
   .catch(err => handdleError(err, res));
+}
+
+function whoami(req, res){
+  const decodedUser = jwt.decode(req.headers.access_token, config.secrets.authSecret)
+  UserModel
+  .findOne({email : decodedUser.email})
+  .then(user =>  {
+    if (!user) { return res.json({error: 'wrong email'}) }
+    return res.json(user)
+  })
+  .catch(err => handdleError(err, res))
+
 }

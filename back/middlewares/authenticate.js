@@ -10,7 +10,7 @@ const authenticate = (req, res, next) => {
       config.secrets.authSecret,
       (err, token) => {
         if (err) {
-          res.status(403).json({
+          return res.status(403).json({
             error: "Token not valid"
           });
         }

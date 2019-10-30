@@ -4,12 +4,11 @@
   "description": "Starts simple web server for html/css/js frontend",
   "main": "index.js",
   "scripts": {
-    "start": " http-server"
+    "start": "http-server"
   },
   "author": "Fer Martin <fer@reboot.academy>",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "http-server": "^0.11.1"
   }
