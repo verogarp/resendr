@@ -28,7 +28,7 @@ function signup(req, res) {
 
     return res.json({ token: token, ...user_data })
   })
-  .catch((err) => res.status(403).json({error: err.errmsg}))
+  .catch((err) => res.status(409).json({error: err.errmsg}))
 }
 
 function login(req, res) {

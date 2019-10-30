@@ -24,8 +24,14 @@
       <label for="user_password">Password:</label>
       <input type="password" id="user_password" name="user_password" />
 
-      <label for="user_location">Location:</label>
-      <input type="location" id="user_location" name="user_location" />
+      <label for="new_user_address">Address:</label>
+      <input type="text" id="new_user_address" name="new_user_address" />
+
+      <label for="register_province">Province:</label>
+      <select name="" id="register_province"></select>
+
+      <label for="new_user_postalCode">Postal Code:</label>
+      <input type="text" id="new_user_postalCode" name="new_user_postalCode" />
 
       <button id="btn-signup">SIGN-UP</button>
     </div>
@@ -51,14 +57,16 @@
       <div id="request">
         <h3>Configure your Request</h3>
         <label for="destination_location">Delivery Address</label>
-        <input type="location" id="destination_location" name="destination_location" />
+        <input type="location" id="destination_user_address" name="destination_location" />
+       
         <label for="destination_location">Delivery Province</label>
-        <input type="location" id="destination_location" name="destination_location" />
+        <select name="" id="destination_user_province"></select>
+      
         <label for="destination_location">Delivery Postal Code</label>
-        <input type="location" id="destination_location" name="destination_location" />
+        <input type="location" id="destination_user_postalCode" name="destination_location" />
 
-        <label for="price">Price</label>
-        <input type="num" id="price" name="price" />
+        <!--<label for="price">Price</label>
+        <input type="num" id="price" name="price" /> -->
 
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" />
@@ -84,11 +92,17 @@
         <select name="" id="destination_user"> </select>
       </div>
 
-      <button id="btn-resend">Resend</button>
+      <div id="resenders_list">
+
+      </div>
+
+      <button id="btn-resend">Request Resend</button>
     </div>
 
     <button id="btn-api">Call API WITH TOKEN</button>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="scripts/provincias.js"></script>
     <script src="scripts/index.js"></script>
   </body>
 </html>

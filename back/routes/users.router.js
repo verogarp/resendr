@@ -5,11 +5,12 @@ const {
   getUserById,
   deleteUserById,
   createUser,
-  updateUser
+  updateUser,
+  getUserByLocation
 } = require('../controlers/users.controller');
 
 router.get('/', getAllUsers);
-router.get('/byLocation/:id', getUserByLocation);
+router.get('/byLocation/:location', getUserByLocation);
 router.get('/:id', getUserById);
 router.delete('/:id', deleteUserById)
 router.post('/', createUser);
