@@ -9,7 +9,17 @@ input {
   margin-bottom: 20px;
 }
 #register, #login {
-  width: 40%;
+  width: 70%;
   display: inline-block;
   vertical-align: top;
+  padding: 20px;
+  margin: auto;
+}
+#register {
+  background-color: #0099ff;
+}
+#login {
+  margin-top: 50px;
+  background-color: #9988ff;
+  display: block;
 }

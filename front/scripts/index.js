@@ -37,7 +37,6 @@ document.getElementById("btn-signup").addEventListener("click", event => {
     email: document.getElementById("user_email").value,
     password: document.getElementById("user_password").value,
     location: document.getElementById("user_location").value,
-    role: document.getElementById("user_role").value
   };
 
   api
@@ -63,7 +62,7 @@ document.getElementById("btn-login").addEventListener("click", event => {
     .post("auth/login", newUser)
     .then(function(response) {
       localStorage.setItem("token", response.data.token);
-      localStorage.setItem("name", response.data.name);
+      localStorage.setItem("name", response.data.username);
       localStorage.setItem("email", response.data.email);
       console.log(response.data);
     })
@@ -81,7 +80,7 @@ document.getElementById("btn-resend").addEventListener("click", event => {
     price: document.getElementById("price").value,
     date: document.getElementById("date").value,
     packageSize: document.getElementById("package_size").value,
-    fragile: document.getElementById("fragile").value === "on" ? true : false
+    fragile: document.getElementById("fragile").value === "on"
   };
 
   const token = localStorage.getItem("token");

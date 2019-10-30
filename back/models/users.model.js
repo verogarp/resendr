@@ -24,13 +24,6 @@ const userSchema = new mongoose.Schema({
     type: Object,
     required: [true, "Location is required"]
   },
-
-  role: {
-    type: String,
-    enum: ["resender", "regular"],
-    required: true,
-    default: "regular"
-  },
   createdAt: {
     type: Number,
     default: Date.now() // Get a timestamp :)
