@@ -1,3 +1,5 @@
+process.stdout.write('\033c');
+
 const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -21,7 +23,15 @@ app.use(helmet())
 app.use(authenticate);
 
 // NONGOOSE
-mongoose.connect(config.mongoURL + config.mongoDBName);
+mongoose.connect(
+  config.mongoURL + config.mongoDBName,
+  { useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+  } ,
+  () => {
+  console.info('🗄️  Connected to Mongoose')
+});
 
 // ROUTING
 const apiRouter = require('./routes');
@@ -29,7 +39,7 @@ app.use('/api', apiRouter);
 
 // Init server
 app.listen(config.port, (err) => {
-  console.info('\n\n' + '>'.repeat(40))
+  console.info('\n' + '>'.repeat(40))
   console.info(`💻  Reboot Server Live`);
   console.info(`📡  PORT: http://localhost:${config.port}`);
   console.info(">".repeat(40) + "\n\n");
