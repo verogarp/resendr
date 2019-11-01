@@ -5,102 +5,211 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Reboot API Front</title>
+    <title>Resendr</title>
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/yystyles.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
   </head>
   <body>
+    <!--Login -->
+    <div id="login" class="card card-signin my-5">
+      <div class="card-body">
+        <h5 class="card-title text-center">Login to Resendr</h5>
+
+        <div class="form-signin">
+          <div class="form-label-group">
+            <input
+              type="text"
+              id="login_email"
+              name="login_email"
+              class="form-control"
+            />
+            <label for="login_email">Email:</label>
+          </div>
+
+          <div class="form-label-group">
+            <input
+              type="password"
+              id="login_password"
+              name="login_password"
+              class="form-control"
+            />
+            <label for="login_password">Password:</label>
+          </div>
+
+          <button
+            class="btn btn-lg btn-primary btn-block text-uppercase"
+            id="login_btn-login"
+          >
+            LOGIN
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Register -->
 
-    <h1>Welcome to Reboot Academy</h1>
-    <div id="register">
-      <h2>Register to Resendr</h2>
-      <label for="user_name">Name:</label>
-      <input type="text" id="user_name" name="user_name" />
+    <div id="register" class="card card-signin my-5">
+      <div class="card-body">
+        <h5 class="card-title text-center">Register to Resendr</h5>
 
-      <label for="user_email">Email:</label>
-      <input type="text" id="user_email" name="user_email" />
+        <div class="form-signin">
+          <div class="form-label-group">
+            <input
+              type="text"
+              id="register_user_name"
+              name="register_user_name"
+              class="form-control"
+            />
+            <label for="register_user_name">Name:</label>
+          </div>
 
-      <label for="user_password">Password:</label>
-      <input type="password" id="user_password" name="user_password" />
+          <div class="form-label-group">
+            <input
+              type="text"
+              id="register_user_email"
+              name="register_user_email"
+              class="form-control"
+            />
+            <label for="register_user_email">Email:</label>
+          </div>
 
-      <label for="new_user_address">Address:</label>
-      <input type="text" id="new_user_address" name="new_user_address" />
+          <div class="form-label-group">
+            <input
+              type="password"
+              id="register_user_password"
+              name="register_user_password"
+              class="form-control"
+            />
+            <label for="">Password:</label>
+          </div>
 
-      <label for="register_province">Province:</label>
-      <select name="" id="register_province"></select>
+          <div class="form-label-group">
+            <input
+              type="text"
+              id="register_user_address"
+              name="register_user_address"
+              class="form-control"
+            />
+            <label for="register_user_address">Address:</label>
+          </div>
 
-      <label for="new_user_postalCode">Postal Code:</label>
-      <input type="text" id="new_user_postalCode" name="new_user_postalCode" />
+          <div class="form-label-group">
+            <input
+              type="text"
+              id="register_user_postalCode"
+              name="register_user_postalCode"
+              class="form-control"
+            />
+            <label for="register_user_postalCode">Postal Code:</label>
+          </div>
 
-      <button id="btn-signup">SIGN-UP</button>
+          <div class="form-label-group">
+            <select
+              class="form-control"
+              id="register_user_province"
+              name="register_user_province"
+              class="form-control"
+            >
+              <option>Default select</option>
+            </select>
+          </div>
+
+          <button
+            class="btn btn-lg btn-primary btn-block text-uppercase"
+            id="register-btn-signup"
+          >
+            Signup
+          </button>
+        </div>
+      </div>
     </div>
 
-    <!--Login -->
-
-    <div id="login">
-      <h2>Login to Resendr</h2>
-
-      <label for="login_email">Email:</label>
-      <input type="text" id="login_email" name="login_email" />
-
-      <label for="login_password">Password:</label>
-      <input type="password" id="login_password" name="login_password" />
-
-      <button id="btn-login">LOGIN</button>
-    </div>
-
-    <!--resend -->
+    <!--resend class="d-none"-->
 
     <div id="resend">
-
       <div id="request">
         <h3>Configure your Request</h3>
-        <label for="destination_location">Delivery Address</label>
-        <input type="location" id="destination_user_address" name="destination_location" />
-       
-        <label for="destination_location">Delivery Province</label>
-        <select name="" id="destination_user_province"></select>
-      
-        <label for="destination_location">Delivery Postal Code</label>
-        <input type="location" id="destination_user_postalCode" name="destination_location" />
+        <label for="request_destination_user_address">Delivery Address</label>
+        <input
+          type="location"
+          id="request_destination_user_address"
+          name="request_destination_user_address"
+        />
 
-        <!--<label for="price">Price</label>
-        <input type="num" id="price" name="price" /> -->
+        <label for="request_destination_user_province">Delivery Province</label>
+        <select
+          name="request_destination_user_province"
+          id="request_destination_user_province"
+        ></select>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" />
+        <label for="request_destination_user_postalCode"
+          >Delivery Postal Code</label
+        >
+        <input
+          type="location"
+          id="request_destination_user_postalCode"
+          name="request_destination_user_postalCode"
+        />
 
-        <label for="package_size">Package size:</label>
-        <select name="" id="package_size">
+        <label for="request_destination_user_date">Date:</label>
+        <input
+          type="request_destination_user_date"
+          id="request_destination_user_date"
+          name="date"
+        />
+
+        <label for="request_destination_package_size">Package size:</label>
+        <select
+          name="request_destination_package_size"
+          id="request_destination_package_size"
+        >
           <option value="small">Small</option>
           <option value="medium">Medium</option>
           <option value="large">Large</option>
           <option value="extraLarge">Extra Large</option>
         </select>
 
-        <label for="fragile">Fragile?:</label>
-        <input type="checkbox" id="fragile" name="fragile" />
+        <label for="request_destination_fragile">Fragile?:</label>
+        <input
+          type="checkbox"
+          id="request_destination_fragile"
+          name="request_destination_fragile"
+        />
       </div>
-
-      <div id="resenders">
-        <h3>Select Resender</h3>
-        <label for="from_location">From location:</label>
-        <select id="from_location" name="from_location" />
-
-        <label for="destination_user">Destination user:</label>
-        <select name="" id="destination_user"> </select>
-      </div>
-
-      <div id="resenders_list">
-
-      </div>
-
-      <button id="btn-resend">Request Resend</button>
+      <button id="request-btn-resend">Request Resend</button>
     </div>
 
-    <button id="btn-api">Call API WITH TOKEN</button>
-    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+    <div id="resenders">
+      <h3>Select Resender</h3>
+      <label for="resender_destination_user_province">From location:</label>
+      <select
+        id="resender_destination_user_province"
+        name="resender_destination_user_province"
+      ></select>
+      <div id="resenders_list"></div>
+    </div>
+
+    
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="scripts/provincias.js"></script>
     <script src="scripts/index.js"></script>
