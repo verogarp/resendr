@@ -16,7 +16,6 @@ const api = axios.create({
   }
 });
 
-//Sign up
 function signup() {
   document
     .getElementById("register-btn-signup")
@@ -44,7 +43,6 @@ function signup() {
     });
 }
 
-//Login
 function login() {
   document
     .getElementById("login_btn-login")
@@ -61,6 +59,7 @@ function login() {
           localStorage.setItem("token", response.data.token);
           localStorage.setItem("name", response.data.username);
           localStorage.setItem("email", response.data.email);
+          localStorage.setItem("userId", response.data._id);
           console.log(response.data);
         })
         .catch(function(error) {
@@ -68,15 +67,15 @@ function login() {
         });
     });
 }
-//Make a resend
 
 function makeAResend() {
   document
     .getElementById("request-btn-resend")
     .addEventListener("click", event => {
       const newResend = {
-        fromUser: localStorage.getItem("whoami"),
-        destinationUser: document.getElementById("destination_user").value,
+        fromUser: localStorage.getItem("userId"),
+        destinationUser: selectedResender,
+        fromLocation: selectedResender.location,
         destinationLocation: {
           address: document.getElementById("request_destination_user_address")
             .value,
@@ -103,14 +102,13 @@ function makeAResend() {
     });
 }
 
-//Filter users by province
-let selectedResender
+let selectedResender;
 
-function selectResender(id){
+function selectResender(id) {
   api
     .get(`users/${id}`)
     .then(res => {
-      selectedResender = res.data
+      selectedResender = res.data;
       console.log(selectedResender);
     })
     .catch(function(error) {
@@ -130,15 +128,22 @@ function filterUsersByProvince() {
       .then(users => {
         let html = "";
         users.data.forEach(function(user) {
-          html += `<div id="location_users"> ${user.name}
-          <button id="btn-resenders_users" onclick="selectResender('${user._id}')"> ${"Solicit resend"}</button>        
+          html += `<div class="row mt-4" id="location_users"> 
+          <div class="col-sm-8">
+          <p class="h5">
+          ${user.name}
+          </p>
+          </div>
+          <div class="col-sm-4">
+          <button class="form-control btn-primary btn-block" id="btn-resenders_users" onclick="selectResender('${user._id}')"> Request </button>
+          </div>        
           </div>`;
         });
         resenders.innerHTML = html;
       });
   });
 }
-//List of provinces
+
 function listOfProvinces() {
   signupProvinces = document.getElementById("register_user_province");
   resendersLocation = document.getElementById(

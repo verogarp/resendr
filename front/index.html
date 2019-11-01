@@ -15,186 +15,227 @@
     />
   </head>
   <body>
-    <!--Login -->
-    <div id="login" class="card card-signin my-5">
-      <div class="card-body">
-        <h5 class="card-title text-center">Login to Resendr</h5>
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-sm-8 mx-auto my-auto">
+          <!--Login -->
+          <div id="login" class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Login to Resendr</h5>
 
-        <div class="form-signin">
-          <div class="form-label-group">
-            <input
-              type="text"
-              id="login_email"
-              name="login_email"
-              class="form-control"
-            />
-            <label for="login_email">Email:</label>
+              <div class="form-signin">
+                <div class="form-label-group">
+                  <input
+                    type="text"
+                    id="login_email"
+                    name="login_email"
+                    class="form-control"
+                  />
+                  <label for="login_email">Email:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input
+                    type="password"
+                    id="login_password"
+                    name="login_password"
+                    class="form-control"
+                  />
+                  <label for="login_password">Password:</label>
+                </div>
+
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  id="login_btn-login"
+                >
+                  LOGIN
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div class="form-label-group">
-            <input
-              type="password"
-              id="login_password"
-              name="login_password"
-              class="form-control"
-            />
-            <label for="login_password">Password:</label>
+          <!-- Register -->
+
+          <div id="register" class="card card-signin my-5 d-none">
+            <div class="card-body">
+              <h5 class="card-title text-center">Register to Resendr</h5>
+
+              <div class="form-signin">
+                <div class="form-label-group">
+                  <input
+                    type="text"
+                    id="register_user_name"
+                    name="register_user_name"
+                    class="form-control"
+                  />
+                  <label for="register_user_name">Name:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input
+                    type="text"
+                    id="register_user_email"
+                    name="register_user_email"
+                    class="form-control"
+                  />
+                  <label for="register_user_email">Email:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input
+                    type="password"
+                    id="register_user_password"
+                    name="register_user_password"
+                    class="form-control"
+                  />
+                  <label for="">Password:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input
+                    type="text"
+                    id="register_user_address"
+                    name="register_user_address"
+                    class="form-control"
+                  />
+                  <label for="register_user_address">Address:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input
+                    type="text"
+                    id="register_user_postalCode"
+                    name="register_user_postalCode"
+                    class="form-control"
+                  />
+                  <label for="register_user_postalCode">Postal Code:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <select
+                    id="register_user_province"
+                    name="register_user_province"
+                    class="form-control form-control-lg"
+                  >
+                    <option>Default select</option>
+                  </select>
+                </div>
+
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  id="register-btn-signup"
+                >
+                  Signup
+                </button>
+              </div>
+            </div>
           </div>
 
-          <button
-            class="btn btn-lg btn-primary btn-block text-uppercase"
-            id="login_btn-login"
-          >
-            LOGIN
-          </button>
+          <div id="resenders" class="card card-signin my-5  d-none">
+            <div class="card-body">
+              <h5 class="card-title text-center">Select Resender</h5>
+              <div class="form-signin">
+                <div class="form-label-group">
+                  <select
+                    id="resender_destination_user_province"
+                    class="form-control form-control-lg"
+                    name="resender_destination_user_province"
+                  >
+                  </select>
+                </div>
+              </div>
+              <div class="container">
+                <div id="resenders_list" class="form-signin"></div>
+              </div>
+            </div>
+          </div>
+
+          <div id="resend" class="card card-signin my-5  d-none">
+            <div class="card-body" id="request">
+              <h5 class="card-title text-center">Configure your Request</h5>
+
+              <div class="form-signin">
+                <div class="form-label-group">
+                  <input
+                    type="location"
+                    id="request_destination_user_address"
+                    name="request_destination_user_address"
+                    class="form-control"
+                  />
+                  <label for="request_destination_user_address"
+                    >Delivery Address</label
+                  >
+                </div>
+
+                <div class="form-label-group">
+                  <input
+                    type="location"
+                    id="request_destination_user_postalCode"
+                    name="request_destination_user_postalCode"
+                    class="form-control"
+                  />
+                  <label for="request_destination_user_postalCode"
+                    >Delivery Postal Code</label
+                  >
+                </div>
+
+                <div class="form-label-group">
+                  <select
+                    name="request_destination_user_province"
+                    id="request_destination_user_province"
+                    class="form-control form-control-lg"
+                  ></select>
+                </div>
+
+                <div class="form-label-group">
+                  <input
+                    type="date"
+                    id="request_destination_user_date"
+                    name="request_destination_user_date"
+                    class="form-control"
+                  />
+                  <label for="request_destination_user_date">Date</label>
+                </div>
+
+                <div class="form-label-group">
+                  <select
+                    name="request_destination_package_size"
+                    id="request_destination_package_size"
+                    class="form-control form-control-lg"
+                  >
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="extraLarge">Extra Large</option>
+                  </select>
+                </div>
+
+                <div class="custom-control custom-checkbox mb-4 h5  d-none">
+                  <input
+                    class="custom-control-input"
+                    id="request_destination_fragile"
+                    name="request_destination_fragile"
+                    type="checkbox"
+                  />
+                  <label class="custom-control-label text-muted" for="request_destination_fragile">
+                    Fragile?
+                  </label>
+                </div>
+
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  id="request-btn-resend"
+                  class="form-control"
+                >
+                  Request Resend
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Register -->
-
-    <div id="register" class="card card-signin my-5">
-      <div class="card-body">
-        <h5 class="card-title text-center">Register to Resendr</h5>
-
-        <div class="form-signin">
-          <div class="form-label-group">
-            <input
-              type="text"
-              id="register_user_name"
-              name="register_user_name"
-              class="form-control"
-            />
-            <label for="register_user_name">Name:</label>
-          </div>
-
-          <div class="form-label-group">
-            <input
-              type="text"
-              id="register_user_email"
-              name="register_user_email"
-              class="form-control"
-            />
-            <label for="register_user_email">Email:</label>
-          </div>
-
-          <div class="form-label-group">
-            <input
-              type="password"
-              id="register_user_password"
-              name="register_user_password"
-              class="form-control"
-            />
-            <label for="">Password:</label>
-          </div>
-
-          <div class="form-label-group">
-            <input
-              type="text"
-              id="register_user_address"
-              name="register_user_address"
-              class="form-control"
-            />
-            <label for="register_user_address">Address:</label>
-          </div>
-
-          <div class="form-label-group">
-            <input
-              type="text"
-              id="register_user_postalCode"
-              name="register_user_postalCode"
-              class="form-control"
-            />
-            <label for="register_user_postalCode">Postal Code:</label>
-          </div>
-
-          <div class="form-label-group">
-            <select
-              class="form-control"
-              id="register_user_province"
-              name="register_user_province"
-              class="form-control"
-            >
-              <option>Default select</option>
-            </select>
-          </div>
-
-          <button
-            class="btn btn-lg btn-primary btn-block text-uppercase"
-            id="register-btn-signup"
-          >
-            Signup
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!--resend class="d-none"-->
-
-    <div id="resend">
-      <div id="request">
-        <h3>Configure your Request</h3>
-        <label for="request_destination_user_address">Delivery Address</label>
-        <input
-          type="location"
-          id="request_destination_user_address"
-          name="request_destination_user_address"
-        />
-
-        <label for="request_destination_user_province">Delivery Province</label>
-        <select
-          name="request_destination_user_province"
-          id="request_destination_user_province"
-        ></select>
-
-        <label for="request_destination_user_postalCode"
-          >Delivery Postal Code</label
-        >
-        <input
-          type="location"
-          id="request_destination_user_postalCode"
-          name="request_destination_user_postalCode"
-        />
-
-        <label for="request_destination_user_date">Date:</label>
-        <input
-          type="request_destination_user_date"
-          id="request_destination_user_date"
-          name="date"
-        />
-
-        <label for="request_destination_package_size">Package size:</label>
-        <select
-          name="request_destination_package_size"
-          id="request_destination_package_size"
-        >
-          <option value="small">Small</option>
-          <option value="medium">Medium</option>
-          <option value="large">Large</option>
-          <option value="extraLarge">Extra Large</option>
-        </select>
-
-        <label for="request_destination_fragile">Fragile?:</label>
-        <input
-          type="checkbox"
-          id="request_destination_fragile"
-          name="request_destination_fragile"
-        />
-      </div>
-      <button id="request-btn-resend">Request Resend</button>
-    </div>
-
-    <div id="resenders">
-      <h3>Select Resender</h3>
-      <label for="resender_destination_user_province">From location:</label>
-      <select
-        id="resender_destination_user_province"
-        name="resender_destination_user_province"
-      ></select>
-      <div id="resenders_list"></div>
-    </div>
-
-    
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

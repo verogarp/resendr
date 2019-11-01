@@ -40,7 +40,7 @@ function login(req, res) {
     bcrypt.compare(req.body.password, user.password, (err, result) => {
       if (!result) { return res.json({error: `wrong password for ${req.body.user_email}`}) }
 
-      const user_data = { username: user.name, email: req.body.email };
+      const user_data = { username: user.name, email: req.body.email, _id: user._id};
 
       const token = jwt.sign(
         user_data,

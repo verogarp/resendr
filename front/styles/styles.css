@@ -1,15 +1,3 @@
-#register,
-#login,
-#resend {
-  width: 50%;
-  display: inline-block;
-  vertical-align: top;
-  padding: 10px;
-  margin: auto;
-  margin-top: 50px;
-}
-
-#login, #register {
-  /* background-color: #9988ff; */
-  display: block;
+html, body {
+  height: 100%;
 }

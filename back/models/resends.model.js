@@ -13,11 +13,11 @@ const resendSchema = new mongoose.Schema({
     required: [true,"destination user is required"]
   },
   fromLocation:{
-    type: String,
+    type: Object,
     required: [true, "from location is required"]
   },
   destinationLocation:{
-    type: String,
+    type: Object,
     required: [true, "destination location is required"]
   },
   /*price:{
