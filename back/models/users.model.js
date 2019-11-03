@@ -1,16 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Name is required']
+    required: [true, "Name is required"]
   },
   email: {
     type: String,
     required: [true, "Email is required"],
     validate: {
       validator(value) {
-        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value);
+        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
+          value
+        );
       }
     },
     unique: [true, "This is email is registered"]
@@ -20,25 +22,25 @@ const userSchema = new mongoose.Schema({
     required: [true, "password is required"]
   },
 
-  location:{
+  location: {
     type: Object,
     required: [true, "Location is required"]
   },
+
   createdAt: {
     type: Number,
     default: Date.now() // Get a timestamp :)
   },
+
   resends: {
-    type: Number,
+    type: Number
   },
-  review: {
-    type: String,
-  },
+
   resentTypes: {
-    type: Number,
+    type: Number
   }
 });
 
-const userModel = mongoose.model('user', userSchema);
+const userModel = mongoose.model("user", userSchema);
 
 module.exports = userModel;

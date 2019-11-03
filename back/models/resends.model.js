@@ -4,12 +4,12 @@ const Schema = mongoose.Schema;
 const resendSchema = new mongoose.Schema({
   fromUser: {
     type: Schema.Types.ObjectId, 
-    ref: "User",
+    ref: "user",
     required: [true,"fromUser is required"]
   },
   destinationUser: {
     type: Schema.Types.ObjectId, 
-    ref: "User",
+    ref: "user",
     required: [true,"destination user is required"]
   },
   fromLocation:{
