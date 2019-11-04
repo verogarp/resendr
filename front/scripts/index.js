@@ -20,9 +20,9 @@ function refreshResendsForMe(id) {
         <td> ${resend.destinationUser.location.address} </td>
         <td> ${date.toLocaleDateString("es-ES")} </td>
         <td> <span>${resend.status}
-        <a href="" class="h3 badge badge-success mx-1">✔️
+        <a href="" class="h3 badge badge-success mx-1" onclick="confirmResend('${resend._id}')">✔️
         </a>
-        <a href="" class="h3 badge badge-danger mx-1">❌
+        <a href="" class="h3 badge badge-danger mx-1" onclick="rejectResend('${resend._id}">❌
         </a>
         </span>
         </td>
@@ -96,7 +96,7 @@ function makeAResend() {
         status: { statusType: "pending" }
       };
       api
-        .post("resends", newResend, { headers: { access_token: token } })
+        .makeResend(newResend)
         .then(function(response) {
           console.log(response);
           document.getElementById("resend").classList.toggle("d-none");
@@ -115,13 +115,30 @@ function makeAResend() {
     });
 }
 
-
-function confirmResend(id){
-
+async function confirmResend(id){
+  const { value: price } = await Swal.fire({
+    title: 'How much do you want to charge',
+    input: 'price',
+    inputPlaceholder: 'e.g. 10'
+  })
+  
+  if (price) {
+    await api.confirmResend(id, price)
+    refreshResendsForMe()
+  }
 }
 
-function rejectResend(id){
-
+async function rejectResend(id){
+  const { value: reason } = await Swal.fire({
+    title: "Why don't you accept it?",
+    input: 'reason',
+    inputPlaceholder: "e.g. I don't work with large packages"
+  })
+  
+  if (reason) {
+    await api.rejectResend(id, reason)
+      refreshResendsForMe()
+  }
 }
 
 
@@ -202,3 +219,4 @@ filterUsersByProvince();
 listOfProvinces();
 mainScreen();
 logout();
+refreshResendsForMe();

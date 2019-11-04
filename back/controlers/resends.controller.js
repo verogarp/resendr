@@ -71,13 +71,13 @@ function updateResend(req, res) {
 
 
 function updateConfirm(req, res) {
-  ResendModel.updateOne({ statusType: "confirmed", price: req.params.price })
+  ResendModel.updateOne({ _id: req.params.id },{status: { statusType: "confirmed", price: req.params.price }})
     .then(response => res.json(response))
     .catch(err => handdleError(err, res));
 }
 
 function updateReject(req, res) {
-  ResendModel.updateOne({ statusType: "rejected", reason: req.params.reason })
+  ResendModel.updateOne({ _id: req.params.id },{status: { statusType: "rejected", reason: req.params.reason }})
     .then(response => res.json(response))
     .catch(err => handdleError(err, res));
 }
