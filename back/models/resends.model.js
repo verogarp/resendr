@@ -26,8 +26,8 @@ const resendSchema = new mongoose.Schema({
     required: [true, "date is required"]
   },
   status: {
-    type: String,
-    enum: ["pending", "bought", "resend","confirmed"],
+    type: Object,
+    //enum: ["pending", "bought", "resend","confirmed"],
   },
   packageSize: {
     type: String,

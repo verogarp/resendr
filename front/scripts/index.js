@@ -8,13 +8,17 @@ const token = localStorage.getItem("token");
   }
 })();
 
-const api = axios.create({
+function initApi() {
+  api = axios.create({
   baseURL: `http://localhost:2222/api/`,
   timeout: 1000,
   headers: {
     access_token: localStorage.getItem("token")
   }
-});
+  });
+}
+let api;
+initApi()
 
 function logout(){
   document
@@ -84,7 +88,7 @@ function login() {
           document.getElementById("login").classList.toggle("d-none");
           document.getElementById("main_screen").classList.toggle("d-none");
           document.getElementById("logout").classList.remove("d-none");
-
+          initApi()
           refreshResendsForMe(response.data._id);
         })
         .catch(function(error) {});
@@ -98,7 +102,8 @@ function login() {
 }
 
 function refreshResendsForMe(id) {
-  api.get(`resends/byFromUser/${id}`).then(function(response) {
+  api.get(`resends/byFromUser/${id}`)
+  .then(function(response) {
     console.log("called", response);
     const resendsTable = document.getElementById("main_screen_resends_body");
 
@@ -119,7 +124,6 @@ function refreshResendsForMe(id) {
       </tr>`;
     });
     resendsTable.innerHTML = html;
-    friconix_update();
   });
 }
 
@@ -185,7 +189,7 @@ function makeAResend() {
           .value,
         fragile:
           document.getElementById("request_destination_fragile").value === "on",
-        status:"pending"
+        status: { statusType: "pending" }
       };
       api
         .post("resends", newResend, { headers: { access_token: token } })
@@ -206,6 +210,17 @@ function makeAResend() {
         });
     });
 }
+
+
+function confirmResend(id){
+
+}
+
+function rejectResend(id){
+  
+}
+
+
 
 let selectedResender;
 

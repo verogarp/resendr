@@ -9,7 +9,9 @@ module.exports = {
   updateResend,
   getAllResenderLocations,
   getAllResendsByFromUser,
-  getAllResendsByDestinationUser
+  getAllResendsByDestinationUser,
+  updateConfirm,
+  updateReject
 };
 
 function getAllResends(req, res) {
@@ -63,6 +65,19 @@ function updateResend(req, res) {
     new: true,
     runValidators: true
   })
+    .then(response => res.json(response))
+    .catch(err => handdleError(err, res));
+}
+
+
+function updateConfirm(req, res) {
+  ResendModel.updateOne({ statusType: "confirmed", price: req.params.price })
+    .then(response => res.json(response))
+    .catch(err => handdleError(err, res));
+}
+
+function updateReject(req, res) {
+  ResendModel.updateOne({ statusType: "rejected", reason: req.params.reason })
     .then(response => res.json(response))
     .catch(err => handdleError(err, res));
 }
