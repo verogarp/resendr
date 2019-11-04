@@ -41,11 +41,36 @@ function Api() {
   }
 
   this.resendsForMe = () => {
-    return api.get(`resends/byFromUser/${localStorage.getItem("userId")}`)
+    return this.api.get(`resends/byFromUser/${localStorage.getItem("userId")}`)
       .then(resenders => {
         return resenders
       })
 
+  }
+
+  this.requestedByMe = () => {
+    return this.api.get(`resends/byDestinationUser/${localStorage.getItem("userId")}`).then(requesteds => {
+      return requesteds
+    })
+  }
+
+  this.chooseResender = () => {
+    return this.api.get(`users/byLocation/${fromLocation.value}`, {
+      headers: { access_token: localStorage.getItem("token") }
+    }).then(chosenResender => {
+      return chosenResender
+    })
+  }
+
+  this.selectResendr = (id) => {
+    return this.api.get(`users/${id}`)
+    .then(selectedResender => {
+      return selectedResender
+    })
+  }
+
+  this.makeResend = () => {
+    return this.api.post(`resends`, { headers: { access_token: localStorage.getItem("token") }})
   }
 
 

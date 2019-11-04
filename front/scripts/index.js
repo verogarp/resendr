@@ -11,7 +11,7 @@ function refreshResendsForMe(id) {
   .resendsForMe()
   .then(response => {
     const resendsTable = document.getElementById("main_screen_resends_body");
-
+    
     let html = "";
     response.data.forEach(function(resend) {
       date = new Date(resend.date)
@@ -33,7 +33,8 @@ function refreshResendsForMe(id) {
 }
 
 function refreshRequestedByMe(id) {
-  api.get(`resends/byDestinationUser/${id}`).then(function(response) {
+  api.requestedByMe()
+  .then(function(response) {
     console.log("called", response);
     const resendsTable = document.getElementById("main_screen_resends_body");
 
@@ -129,7 +130,7 @@ let selectedResender;
 
 function selectResender(id) {
   api
-    .get(`users/${id}`)
+    .selectResendr(id)
     .then(res => {
       selectedResender = res.data;
       console.log(selectedResender);
@@ -146,10 +147,7 @@ function filterUsersByProvince() {
   resenders = document.getElementById("resenders_list");
 
   fromLocation.addEventListener("change", event => {
-    api
-      .get(`users/byLocation/${fromLocation.value}`, {
-        headers: { access_token: token }
-      })
+    api.chooseResender()
       .then(users => {
         let html = "";
         users.data.forEach(function(user) {
