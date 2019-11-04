@@ -9,14 +9,11 @@
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/templateStyles.css" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
   </head>
   <body>
 
-    <div id="logout" class="position-absolute logout-card d-none">
+    <div id="logout" class="position-absolute logout-card">
       <a href="#" class="h1" id="logout-btn">
         <i class="fi-xwsuxl-sign-in-solid"></i>
       </a>
@@ -25,157 +22,12 @@
     <div class="container h-100">
       <div class="row h-100">
         <div class="col-sm-8 mx-auto my-auto">
-          <!--Login -->
-          <div id="login" class="card card-signin my-5">
-            <div class="card-body">
-              <h5 class="card-title text-center">Login to Resendr</h5>
-
-              <div class="form-signin">
-                <div class="form-label-group">
-                  <input
-                    type="text"
-                    id="login_email"
-                    name="login_email"
-                    class="form-control"
-                  />
-                  <label for="login_email">Email:</label>
-                </div>
-
-                <div class="form-label-group">
-                  <input
-                    type="password"
-                    id="login_password"
-                    name="login_password"
-                    class="form-control"
-                  />
-                  <label for="login_password">Password:</label>
-                </div>
-
-                <div
-                  class="alert alert-danger d-none"
-                  role="alert"
-                  id="login-alert"
-                >
-                  Oops, wrong email or password!
-                </div>
-
-                <button
-                  class="btn btn-lg btn-primary btn-block text-uppercase"
-                  id="login_btn-login"
-                >
-                  LOGIN
-                </button>
-
-                <div class="my-4">
-                  <label for="customCheck">Not a user?</label>
-                  <a href="javascript:void(0)" id="login_register_now">
-                    Register now</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Register -->
-
-          <div id="register" class="card card-signin my-5 d-none">
-            <div class="card-body">
-              <h5 class="card-title text-center">Register to Resendr</h5>
-
-              <div class="form-signin">
-                <div class="form-label-group">
-                  <input
-                    type="text"
-                    id="register_user_name"
-                    name="register_user_name"
-                    class="form-control"
-                  />
-                  <label for="register_user_name">Name:</label>
-                </div>
-
-                <div class="form-label-group">
-                  <input
-                    type="text"
-                    id="register_user_email"
-                    name="register_user_email"
-                    class="form-control"
-                  />
-                  <label for="register_user_email">Email:</label>
-                </div>
-
-                <div class="form-label-group">
-                  <input
-                    type="password"
-                    id="register_user_password"
-                    name="register_user_password"
-                    class="form-control"
-                  />
-                  <label for="">Password:</label>
-                </div>
-
-                <div class="form-label-group">
-                  <input
-                    type="text"
-                    id="register_user_address"
-                    name="register_user_address"
-                    class="form-control"
-                  />
-                  <label for="register_user_address">Address:</label>
-                </div>
-
-                <div class="form-label-group">
-                  <input
-                    type="text"
-                    id="register_user_postalCode"
-                    name="register_user_postalCode"
-                    class="form-control"
-                  />
-                  <label for="register_user_postalCode">Postal Code:</label>
-                </div>
-
-                <div class="form-label-group">
-                  <select
-                    id="register_user_province"
-                    name="register_user_province"
-                    class="form-control form-control-lg"
-                  >
-                    <option>Default select</option>
-                  </select>
-                </div>
-
-                <div
-                  class="alert alert-danger d-none"
-                  role="alert"
-                  id="signup-alert"
-                >
-                  Oops, email already taken!
-                </div>
-
-                <button
-                  class="btn btn-lg btn-primary btn-block text-uppercase"
-                  id="register-btn-signup"
-                >
-                  Signup
-                </button>
-
-                <div class="my-4">
-                  <label for="customCheck">Already registered?</label>
-                  <a href="javascript:void(0)" id="register_login_now">
-                    Login now</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div id="main_screen" class="card card-signin my-5 d-none">
+          <!-- Main Page -->
+          <div id="main_screen" class="card card-signin my-5">
             <div class="card-body">
               <h5 class="card-title text-center">History</h5>
               <div class="form-signin">
-                <button
-                  class="btn btn-lg btn-primary btn-block text-uppercase"
-                  id="main_screen_btn"
-                >
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="main_screen_btn" >
                   New request
                 </button>
               </div>
@@ -206,8 +58,7 @@
               <h5 class="card-title text-center">Select Province</h5>
               <div class="form-signin">
                 <div class="form-label-group">
-                  <select
-                    id="resender_destination_user_province"
+                  <select id="resender_destination_user_province"
                     class="form-control form-control-lg"
                     name="resender_destination_user_province"
                   >
@@ -215,10 +66,7 @@
                 </div>
               </div>
 
-              <button
-                class="btn btn-lg btn-primary btn-block text-uppercase"
-                id="go-main-screen"
-              >
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" id="go-main-screen">
                 Back
               </button>
 
@@ -232,14 +80,11 @@
             <div class="card-body" id="request">
               <h5 class="card-title text-center">Configure your Request</h5>
 
-              <button
-              class="btn btn-lg btn-primary btn-block text-uppercase mb-4"
-              id="back_to_select_resender"
-            >
-              Back
-            </button>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase mb-4" id="back_to_select_resender" >
+                Back
+              </button>
+              <!-- TODO: no es form sign-in -->
               <div class="form-signin">
-
 
                 <div class="form-label-group">
                   <input
@@ -273,8 +118,6 @@
                   ></select>
                 </div>
 
-
-
                 <div class="form-label-group">
                   <select
                     name="request_destination_package_size"
@@ -303,10 +146,7 @@
                   </label>
                 </div>
 
-                <button
-                  class="btn btn-lg btn-primary btn-block text-uppercase"
-                  id="request-btn-resend"
-                >
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="request-btn-resend" >
                   Request Resend
                 </button>
               </div>
@@ -336,6 +176,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="scripts/api.js"></script>
     <script src="scripts/provincias.js"></script>
     <script src="scripts/index.js"></script>
   </body>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Resendr</title>
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
+    <link rel="stylesheet" href="styles/templateStyles.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+
+    <div class="container h-100">
+      <div class="row h-100">
+        <div class="col-sm-8 mx-auto my-auto">
+
+          <!--Login -->
+          <div id="login" class="card card-signin my-5">
+            <div class="card-body">
+              <h5 class="card-title text-center">Login to Resendr</h5>
+
+              <div class="form-signin">
+                <div class="form-label-group">
+                  <input type="text" id="login_email" name="login_email" class="form-control" />
+                  <label for="login_email">Email:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="password" id="login_password" name="login_password" class="form-control"/>
+                  <label for="login_password">Password:</label>
+                </div>
+
+                <div class="alert alert-danger d-none" role="alert" id="login-alert" >
+                  Oops, wrong email or password!
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="login_btn-login" >
+                  LOGIN
+                </button>
+
+                <div class="my-4">
+                  <label for="customCheck">Not a user?</label>
+                  <a href="javascript:void(0)" id="login_register_now">
+                    Register now</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Register -->
+
+          <div id="register" class="card card-signin my-5 d-none">
+            <div class="card-body">
+              <h5 class="card-title text-center">Register to Resendr</h5>
+
+              <div class="form-signin">
+                <div class="form-label-group">
+                  <input type="text" id="register_user_name" name="register_user_name" class="form-control" />
+                  <label for="register_user_name">Name:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="text" id="register_user_email" name="register_user_email" class="form-control"/>
+                  <label for="register_user_email">Email:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="password" id="register_user_password" name="register_user_password" class="form-control" />
+                  <label for="">Password:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="text" id="register_user_address" name="register_user_address" class="form-control" />
+                  <label for="register_user_address">Address:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <input type="text" id="register_user_postalCode" name="register_user_postalCode" class="form-control" />
+                  <label for="register_user_postalCode">Postal Code:</label>
+                </div>
+
+                <div class="form-label-group">
+                  <select id="register_user_province" name="register_user_province" class="form-control form-control-lg" >
+                    <option>Default select</option>
+                  </select>
+                </div>
+
+                <div class="alert alert-danger d-none" role="alert" id="signup-alert" >
+                  Oops, email already taken!
+                </div>
+
+                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="register-btn-signup" >
+                  Signup
+                </button>
+
+                <div class="my-4">
+                  <label for="customCheck">Already registered?</label>
+                  <a href="javascript:void(0)" id="register_login_now"> Login now</a >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="scripts/api.js"></script>
+    <script src="scripts/provincias.js"></script>
+    <script src="scripts/registration.js"></script>
+  </body>
+</html>

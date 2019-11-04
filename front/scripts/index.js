@@ -1,130 +1,35 @@
-const token = localStorage.getItem("token");
-
-(function authenticated() {
-  if (localStorage.getItem("token")) {
-    console.log("user authenticated");
-  } else {
-    console.log("user not authenticated");
-  }
-})();
-
-function initApi() {
-  api = axios.create({
-  baseURL: `http://localhost:2222/api/`,
-  timeout: 1000,
-  headers: {
-    access_token: localStorage.getItem("token")
-  }
-  });
-}
-let api;
-initApi()
 
 function logout(){
-  document
-  .getElementById("logout-btn")
-  .addEventListener("click", event => {
-    localStorage.clear()
-    location.reload()
+  document.getElementById("logout-btn") .addEventListener("click", event => {
+    api.logout();
+    window.location.reload()
   })
 }
 
-function signup() {
-  document
-    .getElementById("register-btn-signup")
-    .addEventListener("click", event => {
-      const newUser = {
-        name: document.getElementById("register_user_name").value,
-        email: document.getElementById("register_user_email").value,
-        password: document.getElementById("register_user_password").value,
-        location: {
-          address: document.getElementById("register_user_address").value,
-          province: document.getElementById("register_user_province").value,
-          postalCode: document.getElementById("register_user_postalCode").value
-        }
-      };
-      api
-        .post("auth/signup", newUser)
-        .then(function(response) {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("name", response.data.username);
-          localStorage.setItem("email", response.data.email);
-        })
-        .catch(function(error) {
-            document.getElementById("signup-alert").classList.remove("d-none");
-          console.log(error.response);
-        });
-    });
-
-  document
-    .getElementById("login_register_now")
-    .addEventListener("click", event => {
-      document.getElementById("login").classList.toggle("d-none");
-      document.getElementById("register").classList.toggle("d-none");
-    });
-}
-
-function login() {
-  document
-    .getElementById("login_btn-login")
-    .addEventListener("click", event => {
-      const newUser = {
-        email: document.getElementById("login_email").value,
-        password: document.getElementById("login_password").value
-      };
-      api
-        .post("auth/login", newUser)
-        .then(function(response) {
-          if (response.data.error) {
-            document.getElementById("login-alert").classList.remove("d-none");
-            return;
-          }
-          document.getElementById("login-alert").classList.add("d-none");
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("name", response.data.username);
-          localStorage.setItem("email", response.data.email);
-          localStorage.setItem("userId", response.data._id);
-          console.log(response.data);
-          document.getElementById("login").classList.toggle("d-none");
-          document.getElementById("main_screen").classList.toggle("d-none");
-          document.getElementById("logout").classList.remove("d-none");
-          initApi()
-          refreshResendsForMe(response.data._id);
-        })
-        .catch(function(error) {});
-    });
-  document
-    .getElementById("register_login_now")
-    .addEventListener("click", event => {
-      document.getElementById("register").classList.toggle("d-none");
-      document.getElementById("login").classList.toggle("d-none");
-    });
-}
-
 function refreshResendsForMe(id) {
-  api.get(`resends/byFromUser/${id}`)
-  .then(function(response) {
-    console.log("called", response);
+  api
+  .resendsForMe()
+  .then(response => {
     const resendsTable = document.getElementById("main_screen_resends_body");
 
     let html = "";
     response.data.forEach(function(resend) {
       date = new Date(resend.date)
-      html += `<tr> 
+      html += `<tr>
         <td> ${resend.destinationUser.name} </td>
         <td> ${resend.destinationUser.location.address} </td>
         <td> ${date.toLocaleDateString("es-ES")} </td>
-        <td> <span>${resend.status} 
+        <td> <span>${resend.status}
         <a href="" class="h3 badge badge-success mx-1">✔️
-        </a> 
+        </a>
         <a href="" class="h3 badge badge-danger mx-1">❌
         </a>
         </span>
-        </td> 
+        </td>
       </tr>`;
     });
     resendsTable.innerHTML = html;
-  });
+  })
 }
 
 function refreshRequestedByMe(id) {
@@ -135,7 +40,7 @@ function refreshRequestedByMe(id) {
     let html = "";
     response.data.forEach(function(resend) {
       date = new Date(resend.date)
-      html += `<tr> 
+      html += `<tr>
       <td> ${resend.fromUser.name} </td>
       <td> ${resend.fromUser.location.address} </td>
         <td> ${date.toLocaleDateString("es-ES")} </td>
@@ -147,24 +52,22 @@ function refreshRequestedByMe(id) {
 }
 
 function mainScreen() {
-  document
-    .getElementById("main_screen_btn")
-    .addEventListener("click", event => {
+  document.getElementById("main_screen_btn").addEventListener("click", event => {
       document.getElementById("main_screen").classList.toggle("d-none");
       document.getElementById("resenders").classList.toggle("d-none");
     });
+
   document.getElementById("resends_for_me").addEventListener("click", event => {
     document.getElementById("resends_for_me").classList.add("active");
     document.getElementById("requested_by_me").classList.remove("active");
     refreshResendsForMe(localStorage.getItem("userId"))
   });
-  document
-    .getElementById("requested_by_me")
-    .addEventListener("click", event => {
-      document.getElementById("requested_by_me").classList.add("active");
-      document.getElementById("resends_for_me").classList.remove("active");
-      refreshRequestedByMe(localStorage.getItem("userId"))
-    });
+
+  document.getElementById("requested_by_me").addEventListener("click", event => {
+    document.getElementById("requested_by_me").classList.add("active");
+    document.getElementById("resends_for_me").classList.remove("active");
+    refreshRequestedByMe(localStorage.getItem("userId"))
+  });
 }
 
 function makeAResend() {
@@ -217,7 +120,7 @@ function confirmResend(id){
 }
 
 function rejectResend(id){
-  
+
 }
 
 
@@ -250,7 +153,7 @@ function filterUsersByProvince() {
       .then(users => {
         let html = "";
         users.data.forEach(function(user) {
-          html += `<div class="row mt-4" id="location_users"> 
+          html += `<div class="row mt-4" id="location_users">
           <div class="col-sm-8">
           <p class="h5">
           ${user.name}
@@ -258,7 +161,7 @@ function filterUsersByProvince() {
           </div>
           <div class="col-sm-4">
           <button class="form-control btn-primary btn-block" id="btn-resenders_users" onclick="selectResender('${user._id}')"> Request </button>
-          </div>        
+          </div>
           </div>`;
         });
         resenders.innerHTML = html;
@@ -278,7 +181,6 @@ function filterUsersByProvince() {
 }
 
 function listOfProvinces() {
-  signupProvinces = document.getElementById("register_user_province");
   resendersLocation = document.getElementById(
     "resender_destination_user_province"
   );
@@ -288,17 +190,15 @@ function listOfProvinces() {
 
   let html = "";
   provinces
-    .map(p => p.nm)
-    .forEach(function(province) {
+    .map(p => p.name)
+    .sort((p1, p2) => p1.localeCompare(p2))
+    .forEach(province => {
       html += `<option value="${province}"> ${province} </option>`;
     });
-  signupProvinces.innerHTML = html;
   resendersLocation.innerHTML = html;
   destination_province.innerHTML = html;
 }
 
-signup();
-login();
 makeAResend();
 filterUsersByProvince();
 listOfProvinces();
