@@ -256,6 +256,10 @@ function filterUsersByProvince() {
     document.getElementById("resenders").classList.toggle("d-none");
     document.getElementById("main_screen").classList.toggle("d-none");
   });
+  document.getElementById("back_to_select_resender").addEventListener("click", event => {
+    document.getElementById("resend").classList.toggle("d-none");
+    document.getElementById("resenders").classList.toggle("d-none");
+  });
 }
 
 function listOfProvinces() {

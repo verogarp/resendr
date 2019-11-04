@@ -20,10 +20,7 @@ const resendSchema = new mongoose.Schema({
     type: Object,
     required: [true, "destination location is required"]
   },
-  /*price:{
-    type: Number,
-    required: [false, "price is required"]
-  },*/
+
   date: {
     type: Date,
     required: [true, "date is required"]
