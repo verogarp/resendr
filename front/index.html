@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="styles/reset.css" />
     <link rel="stylesheet" href="styles/styles.css" />
     <link rel="stylesheet" href="styles/templateStyles.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
   </head>
   <body>
-
     <div id="logout" class="position-absolute logout-card">
       <a href="#" class="h1" id="logout-btn">
         <i class="fi-xwsuxl-sign-in-solid"></i>
@@ -21,22 +23,29 @@
 
     <div class="container h-100">
       <div class="row h-100">
-        <div class="col-sm-8 mx-auto my-auto">
+        <div class="col-sm-10 mx-auto my-auto">
           <!-- Main Page -->
           <div id="main_screen" class="card card-signin my-5">
             <div class="card-body">
-              <h5 class="card-title text-center">History</h5>
+              <h5 class="card-title text-center">Your resendr history</h5>
               <div class="form-signin">
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="main_screen_btn" >
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  id="main_screen_btn"
+                >
                   New request
                 </button>
               </div>
               <ul class="nav nav-tabs nav-justified mt-4">
                 <li class="nav-item">
-                  <a class="nav-link active" href="#" id="resends_for_me">Resends for me</a>
+                  <a class="nav-link active" href="javascript:void(0)" id="resends_for_me"
+                    >Resends for me</a
+                  >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#" id="requested_by_me">Requested by me</a>
+                  <a class="nav-link" href="javascript:void(0)" id="requested_by_me"
+                    >Requested by me</a
+                  >
                 </li>
               </ul>
               <table class="table">
@@ -46,6 +55,7 @@
                     <th scope="col">Address</th>
                     <th scope="col">Date</th>
                     <th scope="col">Status</th>
+                    <th scope="col">Package info</th>
                   </tr>
                 </thead>
                 <tbody id="main_screen_resends_body"></tbody>
@@ -55,10 +65,13 @@
 
           <div id="resenders" class="card card-signin my-5  d-none">
             <div class="card-body">
-              <h5 class="card-title text-center">Select Province</h5>
+              <h5 class="card-title text-center">
+                Select the province that can send it to you
+              </h5>
               <div class="form-signin">
                 <div class="form-label-group">
-                  <select id="resender_destination_user_province"
+                  <select
+                    id="resender_destination_user_province"
                     class="form-control form-control-lg"
                     name="resender_destination_user_province"
                   >
@@ -66,7 +79,10 @@
                 </div>
               </div>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" id="go-main-screen">
+              <button
+                class="btn btn-lg btn-primary btn-block text-uppercase"
+                id="go-main-screen"
+              >
                 Back
               </button>
 
@@ -80,12 +96,14 @@
             <div class="card-body" id="request">
               <h5 class="card-title text-center">Configure your Request</h5>
 
-              <button class="btn btn-lg btn-primary btn-block text-uppercase mb-4" id="back_to_select_resender" >
+              <button
+                class="btn btn-lg btn-primary btn-block text-uppercase mb-4"
+                id="back_to_select_resender"
+              >
                 Back
               </button>
               <!-- TODO: no es form sign-in -->
               <div class="form-signin">
-
                 <div class="form-label-group">
                   <input
                     type="location"
@@ -107,9 +125,10 @@
                   />
                   <label for="request_destination_user_postalCode"
                     >Delivery Postal Code</label
-                  >
-                </div>
-
+                    >
+                  </div>
+                  
+                  <label for="delivery_province">Delivery province</label>
                 <div class="form-label-group">
                   <select
                     name="request_destination_user_province"
@@ -118,6 +137,7 @@
                   ></select>
                 </div>
 
+                <label for="package_size">Select the package size</label>
                 <div class="form-label-group">
                   <select
                     name="request_destination_package_size"
@@ -146,7 +166,10 @@
                   </label>
                 </div>
 
-                <button class="btn btn-lg btn-primary btn-block text-uppercase" id="request-btn-resend" >
+                <button
+                  class="btn btn-lg btn-primary btn-block text-uppercase"
+                  id="request-btn-resend"
+                >
                   Request Resend
                 </button>
               </div>
@@ -155,7 +178,6 @@
         </div>
       </div>
     </div>
-
 
     <script defer src="https://friconix.com/cdn/friconix.js"></script>
 

@@ -17,8 +17,8 @@ function signup(req, res) {
     password: hashed_pwd,
     location: req.body.location,
   })
-  .then(() => {
-    const user_data = { username: req.body.name, email: req.body.email};
+  .then((user) => {
+    const user_data = { username: req.body.name, email: req.body.email, _id:user._id};
 
     const token = jwt.sign(
       user_data,
