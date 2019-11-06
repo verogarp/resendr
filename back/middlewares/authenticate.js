@@ -1,8 +1,13 @@
 const jwt = require("jsonwebtoken");
 let config = require("../.env");
 const UserModel = require("../models/users.model");
+
+function isWhiteListed(req){
+ return req.path == "/api/auth/login" || req.path == "/api/auth/signup";
+}
+
 const authenticate = (req, res, next) => {
-  if (req.path == "/api/auth/login" || req.path == "/api/auth/signup") {
+  if (isWhiteListed(req)) {
     next();
   } else {
     jwt.verify(

@@ -15,6 +15,10 @@
     />
   </head>
   <body>
+    <div class="col-sm">
+      <img src="logo_resendr.png" alt="">
+    </div>
+
     <div id="logout" class="position-absolute logout-card">
       <a href="#" class="h1" id="logout-btn">
         <i class="fi-xwsuxl-sign-in-solid"></i>
@@ -38,12 +42,18 @@
               </div>
               <ul class="nav nav-tabs nav-justified mt-4">
                 <li class="nav-item">
-                  <a class="nav-link active" href="javascript:void(0)" id="resends_for_me"
+                  <a
+                    class="nav-link active"
+                    href="javascript:void(0)"
+                    id="resends_for_me"
                     >Resends for me</a
                   >
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0)" id="requested_by_me"
+                  <a
+                    class="nav-link"
+                    href="javascript:void(0)"
+                    id="requested_by_me"
                     >Requested by me</a
                   >
                 </li>
@@ -52,7 +62,7 @@
                 <thead>
                   <tr>
                     <th scope="col">Full name</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">User Address</th>
                     <th scope="col">Date</th>
                     <th scope="col">Status</th>
                     <th scope="col">Package info</th>
@@ -66,7 +76,7 @@
           <div id="resenders" class="card card-signin my-5  d-none">
             <div class="card-body">
               <h5 class="card-title text-center">
-                Select the province that can send it to you
+                Where is your package going to?
               </h5>
               <div class="form-signin">
                 <div class="form-label-group">
@@ -125,10 +135,10 @@
                   />
                   <label for="request_destination_user_postalCode"
                     >Delivery Postal Code</label
-                    >
-                  </div>
-                  
-                  <label for="delivery_province">Delivery province</label>
+                  >
+                </div>
+
+                <label for="delivery_province">Delivery province</label>
                 <div class="form-label-group">
                   <select
                     name="request_destination_user_province"

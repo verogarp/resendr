@@ -112,8 +112,7 @@ function makeAResend() {
         date: new Date(),
         packageSize: document.getElementById("request_destination_package_size")
           .value,
-        fragile:
-          document.getElementById("request_destination_fragile").value === "on" ? "true" : "false",
+        fragile: document.getElementById("request_destination_fragile").checked,
         status: { statusType: "pending" }
       };
       api
@@ -127,6 +126,7 @@ function makeAResend() {
           document.getElementById("request_destination_user_postalCode").value =
             "";
           Swal.fire("Yay!", "Resend requested!", "success");
+          refreshResendsForMe()
         })
         .catch(function(error) {
           console.log(error.response);
@@ -134,71 +134,84 @@ function makeAResend() {
     });
 }
 
-function resendsForMeInfo(id) {  
+function resendsForMeInfo(id) {
   const resendData = allResends.find(resend => resend._id === id);
-    Swal.fire({
-    title: 'Package info',
-    html : `
-    <h4> Province:  ${resendData.destinationLocation.province} </h4>
-    <h4> Address: ${resendData.destinationLocation.address} </h4>
-    <h4> Size: ${resendData.packageSize}</h4>
-    <h4> Fragile?: ${resendData.fragile}</h4>
-    `,
+  let statusHtml = `Status: ${resendData.status.statusType}`;
+
+  let html = `
+  <h4> Province:  ${resendData.destinationLocation.province} </h4>
+  <h4> Address: ${resendData.destinationLocation.address} </h4>
+  <h4> Size: ${resendData.packageSize}</h4>
+  ${resendData.fragile ? '<h4 class="text-danger"> Fragile!</h4>' : ""} 
+   ${
+     resendData.status.statusType == "confirmed"
+       ? "<h4> Price: " + resendData.status.price + "$ </h4>"
+       : ""
+   } 
+   <h4> ${statusHtml}</h4> 
+  ${
+    resendData.status.statusType == "rejected"
+      ? "<h4> Reason: " + resendData.status.reason + " </4>"
+      : ""
+  }`;
+
+  Swal.fire({
+    title: "Package info",
+    html: html,
     showCancelButton: true
-  })
+  });
 }
 
-function requestedByMeInfo(id) {  
+function requestedByMeInfo(id) {
   const resendData = allRequested.find(resend => resend._id === id);
-    Swal.fire({
-    title: 'Package info',
-    html : `
-    <h4> Province:  ${resendData.fromLocation.province} </h4>
-    <h4> Address: ${resendData.fromLocation.address} </h4>
-    <h4> Size: ${resendData.packageSize}</h4>
-    <h4> Fragile?: ${resendData.fragile}</h4>
-    `,
+  let statusHtml = `Status: ${resendData.status.statusType}`;
+
+  let html = `
+  <h4> Province:  ${resendData.fromLocation.province} </h4>
+  <h4> Address: ${resendData.fromLocation.address} </h4>
+  <h4> Size: ${resendData.packageSize}</h4>
+  ${resendData.fragile ? '<h4 class="text-danger"> Fragile!</h4>' : ""} 
+   ${
+     resendData.status.statusType == "confirmed"
+       ? "<h4> Price: " + resendData.status.price + "$ </h4>"
+       : ""
+   } 
+   <h4> ${statusHtml}</h4> 
+  ${
+    resendData.status.statusType == "rejected"
+      ? "<h4> Reason: " + resendData.status.reason + " </4>"
+      : ""
+  }`;
+
+  Swal.fire({
+    title: "Package info",
+    html: html,
     showCancelButton: true
-  })
+  });
 }
-
-
 
 async function confirmResend(id) {
   const { value: price } = await Swal.fire({
     title: "How much do you want to charge",
     html: `
     <div class="input-group">
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+    <input type="text" class="form-control text-right" aria-label="Amount (to the nearest dollar)" id="confirm-resend-input">
     <div class="input-group-append">
       <span class="input-group-text">$</span>
-      <span class="input-group-text">.00</span>
     </div>
   </div>`,
     inputPlaceholder: "e.g. 10",
-    showCancelButton: true
+    showCancelButton: true,
+    preConfirm: () =>
+      Promise.resolve(document.getElementById("confirm-resend-input").value)
   });
 
-  if (price) {
+  const priceNumber = parseFloat(price);
+  if (!isNaN(priceNumber)) {
     await api.confirmResend(id, price);
     refreshResendsForMe();
   }
 }
-
-
-// async function confirmResend(id) {
-//   const { value: price } = await Swal.fire({
-//     title: "How much do you want to charge",
-//     input: "text",
-//     inputPlaceholder: "e.g. 10",
-//     showCancelButton: true
-//   });
-
-//   if (price) {
-//     await api.confirmResend(id, price);
-//     refreshResendsForMe();
-//   }
-// }
 
 async function rejectResend(id) {
   const { value: reason } = await Swal.fire({
