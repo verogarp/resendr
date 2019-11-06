@@ -1,9 +1,9 @@
 html,
 body {
-  height: 100%;
+  height:70%;
 }
 
-.logout-card {
+.logout-card { 
   right: 1%;
   top: 1%;
   opacity: 0.5;

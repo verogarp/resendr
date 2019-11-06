@@ -1,157 +1,157 @@
 const provinces = [{
 	"id": "04",
-	"nm": "Almería"
+	"name": "Almería"
 }, {
 	"id": "11",
-	"nm": "Cádiz"
+	"name": "Cádiz"
 }, {
 	"id": "14",
-	"nm": "Córdoba"
+	"name": "Córdoba"
 }, {
 	"id": "18",
-	"nm": "Granada"
+	"name": "Granada"
 }, {
 	"id": "21",
-	"nm": "Huelva"
+	"name": "Huelva"
 }, {
 	"id": "23",
-	"nm": "Jaén"
+	"name": "Jaén"
 }, {
 	"id": "29",
-	"nm": "Málaga"
+	"name": "Málaga"
 }, {
 	"id": "41",
-	"nm": "Sevilla"
+	"name": "Sevilla"
 }, {
 	"id": "22",
-	"nm": "Huesca"
+	"name": "Huesca"
 }, {
 	"id": "44",
-	"nm": "Teruel"
+	"name": "Teruel"
 }, {
 	"id": "50",
-	"nm": "Zaragoza"
+	"name": "Zaragoza"
 }, {
 	"id": "33",
-	"nm": "Asturias"
+	"name": "Asturias"
 }, {
 	"id": "07",
-	"nm": "Islas Baleares"
+	"name": "Islas Baleares"
 }, {
 	"id": "35",
-	"nm": "Las Palmas"
+	"name": "Las Palmas"
 }, {
 	"id": "38",
-	"nm": "Santa Cruz de Tenerife"
+	"name": "Santa Cruz de Tenerife"
 }, {
 	"id": "39",
-	"nm": "Cantabria"
+	"name": "Cantabria"
 }, {
 	"id": "05",
-	"nm": "Ávila"
+	"name": "Ávila"
 }, {
 	"id": "09",
-	"nm": "Burgos"
+	"name": "Burgos"
 }, {
 	"id": "24",
-	"nm": "León"
+	"name": "León"
 }, {
 	"id": "34",
-	"nm": "Palencia"
+	"name": "Palencia"
 }, {
 	"id": "37",
-	"nm": "Salamanca"
+	"name": "Salamanca"
 }, {
 	"id": "40",
-	"nm": "Segovia"
+	"name": "Segovia"
 }, {
 	"id": "42",
-	"nm": "Soria"
+	"name": "Soria"
 }, {
 	"id": "47",
-	"nm": "Valladolid"
+	"name": "Valladolid"
 }, {
 	"id": "49",
-	"nm": "Zamora"
+	"name": "Zamora"
 }, {
 	"id": "02",
-	"nm": "Albacete"
+	"name": "Albacete"
 }, {
 	"id": "13",
-	"nm": "Ciudad Real"
+	"name": "Ciudad Real"
 }, {
 	"id": "16",
-	"nm": "Cuenca"
+	"name": "Cuenca"
 }, {
 	"id": "19",
-	"nm": "Guadalajara"
+	"name": "Guadalajara"
 }, {
 	"id": "45",
-	"nm": "Toledo"
+	"name": "Toledo"
 }, {
 	"id": "08",
-	"nm": "Barcelona"
+	"name": "Barcelona"
 }, {
 	"id": "17",
-	"nm": "Girona"
+	"name": "Girona"
 }, {
 	"id": "25",
-	"nm": "Lleida"
+	"name": "Lleida"
 }, {
 	"id": "43",
-	"nm": "Tarragona"
+	"name": "Tarragona"
 }, {
 	"id": "03",
-	"nm": "Alicante"
+	"name": "Alicante"
 }, {
 	"id": "12",
-	"nm": "Castellón"
+	"name": "Castellón"
 }, {
 	"id": "46",
-	"nm": "Valencia"
+	"name": "Valencia"
 }, {
 	"id": "06",
-	"nm": "Badajoz"
+	"name": "Badajoz"
 }, {
 	"id": "10",
-	"nm": "Cáceres"
+	"name": "Cáceres"
 }, {
 	"id": "15",
-	"nm": "A Coruña"
+	"name": "A Coruña"
 }, {
 	"id": "27",
-	"nm": "Lugo"
+	"name": "Lugo"
 }, {
 	"id": "32",
-	"nm": "Ourense"
+	"name": "Ourense"
 }, {
 	"id": "36",
-	"nm": "Pontevedra"
+	"name": "Pontevedra"
 }, {
 	"id": "28",
-	"nm": "Madrid"
+	"name": "Madrid"
 }, {
 	"id": "30",
-	"nm": "Murcia"
+	"name": "Murcia"
 }, {
 	"id": "31",
-	"nm": "Navarra"
+	"name": "Navarra"
 }, {
 	"id": "01",
-	"nm": "Álava"
+	"name": "Álava"
 }, {
 	"id": "48",
-	"nm": "Bizkaia"
+	"name": "Bizkaia"
 }, {
 	"id": "20",
-	"nm": "Gipuzkoa"
+	"name": "Gipuzkoa"
 }, {
 	"id": "26",
-	"nm": "La Rioja"
+	"name": "La Rioja"
 }, {
 	"id": "51",
-	"nm": "Ceuta"
+	"name": "Ceuta"
 }, {
 	"id": "52",
-	"nm": "Melilla"
+	"name": "Melilla"
 }]

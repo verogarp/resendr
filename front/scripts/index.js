@@ -1,145 +1,68 @@
-const token = localStorage.getItem("token");
-
-(function authenticated() {
-  if (localStorage.getItem("token")) {
-    console.log("user authenticated");
-  } else {
-    console.log("user not authenticated");
-  }
-})();
-
-function initApi() {
-  api = axios.create({
-  baseURL: `http://localhost:2222/api/`,
-  timeout: 1000,
-  headers: {
-    access_token: localStorage.getItem("token")
-  }
+function logout() {
+  document.getElementById("logout-btn").addEventListener("click", event => {
+    api.logout();
+    window.location.reload();
   });
 }
-let api;
-initApi()
 
-function logout(){
-  document
-  .getElementById("logout-btn")
-  .addEventListener("click", event => {
-    localStorage.clear()
-    location.reload()
-  })
-}
-
-function signup() {
-  document
-    .getElementById("register-btn-signup")
-    .addEventListener("click", event => {
-      const newUser = {
-        name: document.getElementById("register_user_name").value,
-        email: document.getElementById("register_user_email").value,
-        password: document.getElementById("register_user_password").value,
-        location: {
-          address: document.getElementById("register_user_address").value,
-          province: document.getElementById("register_user_province").value,
-          postalCode: document.getElementById("register_user_postalCode").value
-        }
-      };
-      api
-        .post("auth/signup", newUser)
-        .then(function(response) {
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("name", response.data.username);
-          localStorage.setItem("email", response.data.email);
-        })
-        .catch(function(error) {
-            document.getElementById("signup-alert").classList.remove("d-none");
-          console.log(error.response);
-        });
-    });
-
-  document
-    .getElementById("login_register_now")
-    .addEventListener("click", event => {
-      document.getElementById("login").classList.toggle("d-none");
-      document.getElementById("register").classList.toggle("d-none");
-    });
-}
-
-function login() {
-  document
-    .getElementById("login_btn-login")
-    .addEventListener("click", event => {
-      const newUser = {
-        email: document.getElementById("login_email").value,
-        password: document.getElementById("login_password").value
-      };
-      api
-        .post("auth/login", newUser)
-        .then(function(response) {
-          if (response.data.error) {
-            document.getElementById("login-alert").classList.remove("d-none");
-            return;
-          }
-          document.getElementById("login-alert").classList.add("d-none");
-          localStorage.setItem("token", response.data.token);
-          localStorage.setItem("name", response.data.username);
-          localStorage.setItem("email", response.data.email);
-          localStorage.setItem("userId", response.data._id);
-          console.log(response.data);
-          document.getElementById("login").classList.toggle("d-none");
-          document.getElementById("main_screen").classList.toggle("d-none");
-          document.getElementById("logout").classList.remove("d-none");
-          initApi()
-          refreshResendsForMe(response.data._id);
-        })
-        .catch(function(error) {});
-    });
-  document
-    .getElementById("register_login_now")
-    .addEventListener("click", event => {
-      document.getElementById("register").classList.toggle("d-none");
-      document.getElementById("login").classList.toggle("d-none");
-    });
-}
+let allResends;
 
 function refreshResendsForMe(id) {
-  api.get(`resends/byFromUser/${id}`)
-  .then(function(response) {
-    console.log("called", response);
+  api.resendsForMe().then(response => {
+    allResends = response.data;
     const resendsTable = document.getElementById("main_screen_resends_body");
 
     let html = "";
     response.data.forEach(function(resend) {
-      date = new Date(resend.date)
-      html += `<tr> 
+      date = new Date(resend.date);
+      const dNone = resend.status.statusType == "pending" ? "" : "d-none";
+      html += `<tr>
         <td> ${resend.destinationUser.name} </td>
         <td> ${resend.destinationUser.location.address} </td>
         <td> ${date.toLocaleDateString("es-ES")} </td>
-        <td> <span>${resend.status} 
-        <a href="" class="h3 badge badge-success mx-1">✔️
-        </a> 
-        <a href="" class="h3 badge badge-danger mx-1">❌
+        <td> <span>${resend.status.statusType}
+        <a href="javascript:void(0)" class="h3 badge badge-success mx-1 ${dNone}" onclick="confirmResend('${
+        resend._id
+      }')">✔️
+        </a>
+        <a href="javascript:void(0)" class="h3 badge badge-danger mx-1 ${dNone}" onclick="rejectResend('${
+        resend._id
+      }')">❌
         </a>
         </span>
-        </td> 
+        </td>
+        <td>
+        <a href="javascript:void(0)" class="h3 badge badge-info mx-1" onclick="resendsForMeInfo('${
+          resend._id
+        }')">ℹ️</a>
+        </td>
       </tr>`;
     });
     resendsTable.innerHTML = html;
   });
 }
 
+let allRequested;
+
 function refreshRequestedByMe(id) {
-  api.get(`resends/byDestinationUser/${id}`).then(function(response) {
-    console.log("called", response);
+  api.requestedByMe().then(function(response) {
+    allRequested = response.data;
     const resendsTable = document.getElementById("main_screen_resends_body");
 
     let html = "";
     response.data.forEach(function(resend) {
-      date = new Date(resend.date)
-      html += `<tr> 
+      date = new Date(resend.date);
+      html += `<tr>
       <td> ${resend.fromUser.name} </td>
       <td> ${resend.fromUser.location.address} </td>
-        <td> ${date.toLocaleDateString("es-ES")} </td>
-        <td> ${resend.status} </td>
+      <td> ${date.toLocaleDateString("es-ES")} </td>
+      <td> ${resend.status.statusType} </td>
+      <td>
+      <a href="javascript:void(0)" class="h3 badge badge-info mx-1" onclick="requestedByMeInfo('${
+        resend._id
+      }')">ℹ️</a>
+      </td>
+
       </tr>`;
     });
     resendsTable.innerHTML = html;
@@ -153,17 +76,19 @@ function mainScreen() {
       document.getElementById("main_screen").classList.toggle("d-none");
       document.getElementById("resenders").classList.toggle("d-none");
     });
+
   document.getElementById("resends_for_me").addEventListener("click", event => {
     document.getElementById("resends_for_me").classList.add("active");
     document.getElementById("requested_by_me").classList.remove("active");
-    refreshResendsForMe(localStorage.getItem("userId"))
+    refreshResendsForMe(localStorage.getItem("userId"));
   });
+
   document
     .getElementById("requested_by_me")
     .addEventListener("click", event => {
       document.getElementById("requested_by_me").classList.add("active");
       document.getElementById("resends_for_me").classList.remove("active");
-      refreshRequestedByMe(localStorage.getItem("userId"))
+      refreshRequestedByMe(localStorage.getItem("userId"));
     });
 }
 
@@ -184,26 +109,24 @@ function makeAResend() {
             "request_destination_user_postalCode"
           ).value
         },
-          date: new Date(),
+        date: new Date(),
         packageSize: document.getElementById("request_destination_package_size")
           .value,
-        fragile:
-          document.getElementById("request_destination_fragile").value === "on",
+        fragile: document.getElementById("request_destination_fragile").checked,
         status: { statusType: "pending" }
       };
       api
-        .post("resends", newResend, { headers: { access_token: token } })
+        .makeResend(newResend)
         .then(function(response) {
           console.log(response);
           document.getElementById("resend").classList.toggle("d-none");
           document.getElementById("main_screen").classList.toggle("d-none");
-          document.getElementById("request_destination_user_address").value = "";
-          document.getElementById("request_destination_user_postalCode").value = "";
-          Swal.fire(
-            'Yay!',
-            'Resend requested!',
-            'success'
-          )
+          document.getElementById("request_destination_user_address").value =
+            "";
+          document.getElementById("request_destination_user_postalCode").value =
+            "";
+          Swal.fire("Yay!", "Resend requested!", "success");
+          refreshResendsForMe()
         })
         .catch(function(error) {
           console.log(error.response);
@@ -211,22 +134,104 @@ function makeAResend() {
     });
 }
 
+function resendsForMeInfo(id) {
+  const resendData = allResends.find(resend => resend._id === id);
+  let statusHtml = `Status: ${resendData.status.statusType}`;
 
-function confirmResend(id){
+  let html = `
+  <h4> Province:  ${resendData.destinationLocation.province} </h4>
+  <h4> Address: ${resendData.destinationLocation.address} </h4>
+  <h4> Size: ${resendData.packageSize}</h4>
+  ${resendData.fragile ? '<h4 class="text-danger"> Fragile!</h4>' : ""} 
+   ${
+     resendData.status.statusType == "confirmed"
+       ? "<h4> Price: " + resendData.status.price + "$ </h4>"
+       : ""
+   } 
+   <h4> ${statusHtml}</h4> 
+  ${
+    resendData.status.statusType == "rejected"
+      ? "<h4> Reason: " + resendData.status.reason + " </4>"
+      : ""
+  }`;
 
+  Swal.fire({
+    title: "Package info",
+    html: html,
+    showCancelButton: true
+  });
 }
 
-function rejectResend(id){
-  
+function requestedByMeInfo(id) {
+  const resendData = allRequested.find(resend => resend._id === id);
+  let statusHtml = `Status: ${resendData.status.statusType}`;
+
+  let html = `
+  <h4> Province:  ${resendData.fromLocation.province} </h4>
+  <h4> Address: ${resendData.fromLocation.address} </h4>
+  <h4> Size: ${resendData.packageSize}</h4>
+  ${resendData.fragile ? '<h4 class="text-danger"> Fragile!</h4>' : ""} 
+   ${
+     resendData.status.statusType == "confirmed"
+       ? "<h4> Price: " + resendData.status.price + "$ </h4>"
+       : ""
+   } 
+   <h4> ${statusHtml}</h4> 
+  ${
+    resendData.status.statusType == "rejected"
+      ? "<h4> Reason: " + resendData.status.reason + " </4>"
+      : ""
+  }`;
+
+  Swal.fire({
+    title: "Package info",
+    html: html,
+    showCancelButton: true
+  });
 }
 
+async function confirmResend(id) {
+  const { value: price } = await Swal.fire({
+    title: "How much do you want to charge",
+    html: `
+    <div class="input-group">
+    <input type="text" class="form-control text-right" aria-label="Amount (to the nearest dollar)" id="confirm-resend-input">
+    <div class="input-group-append">
+      <span class="input-group-text">$</span>
+    </div>
+  </div>`,
+    inputPlaceholder: "e.g. 10",
+    showCancelButton: true,
+    preConfirm: () =>
+      Promise.resolve(document.getElementById("confirm-resend-input").value)
+  });
 
+  const priceNumber = parseFloat(price);
+  if (!isNaN(priceNumber)) {
+    await api.confirmResend(id, price);
+    refreshResendsForMe();
+  }
+}
+
+async function rejectResend(id) {
+  const { value: reason } = await Swal.fire({
+    title: "Why don't you accept it?",
+    input: "text",
+    inputPlaceholder: "e.g. I don't work with large packages",
+    showCancelButton: true
+  });
+
+  if (reason) {
+    await api.rejectResend(id, reason);
+    refreshResendsForMe();
+  }
+}
 
 let selectedResender;
 
 function selectResender(id) {
   api
-    .get(`users/${id}`)
+    .selectResendr(id)
     .then(res => {
       selectedResender = res.data;
       console.log(selectedResender);
@@ -244,13 +249,11 @@ function filterUsersByProvince() {
 
   fromLocation.addEventListener("change", event => {
     api
-      .get(`users/byLocation/${fromLocation.value}`, {
-        headers: { access_token: token }
-      })
+      .chooseResender()
       .then(users => {
         let html = "";
         users.data.forEach(function(user) {
-          html += `<div class="row mt-4" id="location_users"> 
+          html += `<div class="row mt-4" id="location_users">
           <div class="col-sm-8">
           <p class="h5">
           ${user.name}
@@ -258,7 +261,7 @@ function filterUsersByProvince() {
           </div>
           <div class="col-sm-4">
           <button class="form-control btn-primary btn-block" id="btn-resenders_users" onclick="selectResender('${user._id}')"> Request </button>
-          </div>        
+          </div>
           </div>`;
         });
         resenders.innerHTML = html;
@@ -271,14 +274,15 @@ function filterUsersByProvince() {
     document.getElementById("resenders").classList.toggle("d-none");
     document.getElementById("main_screen").classList.toggle("d-none");
   });
-  document.getElementById("back_to_select_resender").addEventListener("click", event => {
-    document.getElementById("resend").classList.toggle("d-none");
-    document.getElementById("resenders").classList.toggle("d-none");
-  });
+  document
+    .getElementById("back_to_select_resender")
+    .addEventListener("click", event => {
+      document.getElementById("resend").classList.toggle("d-none");
+      document.getElementById("resenders").classList.toggle("d-none");
+    });
 }
 
 function listOfProvinces() {
-  signupProvinces = document.getElementById("register_user_province");
   resendersLocation = document.getElementById(
     "resender_destination_user_province"
   );
@@ -288,19 +292,18 @@ function listOfProvinces() {
 
   let html = "";
   provinces
-    .map(p => p.nm)
-    .forEach(function(province) {
+    .map(p => p.name)
+    .sort((p1, p2) => p1.localeCompare(p2))
+    .forEach(province => {
       html += `<option value="${province}"> ${province} </option>`;
     });
-  signupProvinces.innerHTML = html;
   resendersLocation.innerHTML = html;
   destination_province.innerHTML = html;
 }
 
-signup();
-login();
 makeAResend();
 filterUsersByProvince();
 listOfProvinces();
 mainScreen();
 logout();
+refreshResendsForMe();
